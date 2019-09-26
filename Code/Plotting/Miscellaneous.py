@@ -90,7 +90,10 @@ def chip_channels_plot(window):
     return fig
 
 def channel_rates(window):
-    """plots neutron event rate for each channel"""
+    """plots neutron event rate for each channel
+       raw: for all events
+       clustered: only neutron (coincidence) events
+    """
     def channel_rates_plot_bus(events, subtitle, typeCh, wires):
         plt.xlabel('grid channel')
         plt.ylabel('Rate of total counts')
@@ -123,33 +126,41 @@ def channel_rates(window):
             plt.scatter(wChs, w_rates, color="crimson", zorder=2)
             plt.title(sub_title)
 
-    clusters_16 = window.Clusters_16_layers
-    clusters_16 = filter_coincident_events(clusters_16, window)
-    clusters_20 = window.Clusters_20_layers
-    clusters_20 = filter_coincident_events(clusters_20, window)
-    start_time = clusters_16.head(1)['Time'].values[0]
-    end_time = clusters_16.tail(1)['Time'].values[0]
+    if window.raw_rates.isChecked():
+        events_16 = window.Events_16_layers
+        events_16 = filter_events(events_16, window)
+        events_20 = window.Events_20_layers
+        events_20 = filter_events(events_20, window)
+        start_time = events_16.head(1)['srs_timestamp'].values[0]
+        end_time = events_16.tail(1)['srs_timestamp'].values[0]
+        tag = "raw"
+    else:
+        events_16 = window.Clusters_16_layers
+        events_16 = filter_coincident_events(events_16, window)
+        events_20 = window.Clusters_20_layers
+        events_20 = filter_coincident_events(events_20, window)
+        start_time = events_16.head(1)['Time'].values[0]
+        end_time = events_16.tail(1)['Time'].values[0]
+        tag = "neutrons"
     typeChs = ['gCh', 'wCh']
     grids_or_wires = {'wCh': 'Wires', 'gCh': 'Grids'}
     # plot
     fig = plt.figure()
     fig.set_figheight(5)
     fig.set_figwidth(10)
-    plt.suptitle('Total rate per channel \n%s)' % window.data_sets.splitlines()[0])
-
+    plt.suptitle('Total rate per channel -- %s\n%s)' % (tag, window.data_sets.splitlines()[0]))
     # for 20 layers
     for i, typeCh in enumerate(typeChs):
         sub_title = "%s -- 20 layers" % grids_or_wires[typeCh]
         wires = 80
         plt.subplot(2,2,i+1)
-        channel_rates_plot_bus(clusters_20, sub_title, typeCh, wires)
-
+        channel_rates_plot_bus(events_20, sub_title, typeCh, wires)
     # for 16 layers
     for i, typeCh in enumerate(typeChs):
         sub_title = "%s -- 16 layers" % grids_or_wires[typeCh]
         plt.subplot(2,2,i+3)
         wires = 64
-        channel_rates_plot_bus(clusters_16, sub_title, typeCh, wires)
+        channel_rates_plot_bus(events_16, sub_title, typeCh, wires)
 
     plt.subplots_adjust(left=0.1, right=0.98, top=0.86, bottom=0.09, wspace=0.25, hspace=0.45)
     return fig

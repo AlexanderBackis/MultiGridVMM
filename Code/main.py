@@ -203,6 +203,7 @@ class MainWindow(QMainWindow):
         self.timestamp_button.clicked.connect(self.timestamp_action)
         self.rate_button.clicked.connect(self.rate_action)
         self.channel_rate_button.clicked.connect(self.channel_rate_action)
+        self.toogle_raw_clustered_rates()
         self.chip_ch_button.clicked.connect(self.chip_channels_action)
         self.toogle_VMM_MG()
         # Help
@@ -231,7 +232,9 @@ class MainWindow(QMainWindow):
         self.ind_ch_20.setStyleSheet("background-color:hsv(240, 10, 220)")
         self.line_6.setStyleSheet("background-color:gray")
         self.line_16.setStyleSheet("background-color:gray")
-
+        self.channel_rate_button.setStyleSheet("background-color:hsv(290,10,220);border:2px solid hsv(290,10,200)")
+        self.raw_rates.setStyleSheet("background-color:hsv(290,10,220)")
+        self.clustered_rates.setStyleSheet("background-color:hsv(290,10,220)")
 
     def refresh_window(self):
         self.update()
@@ -281,6 +284,13 @@ class MainWindow(QMainWindow):
             lambda checked: checked and self.ind_ch_20.setChecked(False))
         self.ind_ch_20.toggled.connect(
             lambda checked: checked and self.ind_ch_16.setChecked(False))
+
+    def toogle_raw_clustered_rates(self):
+        self.raw_rates.toggled.connect(
+            lambda checked: checked and self.clustered_rates.setChecked(False))
+        self.clustered_rates.toggled.connect(
+            lambda checked: checked and self.raw_rates.setChecked(False))
+
 
 # =============================================================================
 # Start GUI

@@ -1114,7 +1114,7 @@
     <property name="geometry">
      <rect>
       <x>575</x>
-      <y>290</y>
+      <y>314</y>
       <width>121</width>
       <height>51</height>
      </rect>
@@ -1331,10 +1331,10 @@
    <widget class="QPushButton" name="channel_rate_button">
     <property name="geometry">
      <rect>
-      <x>575</x>
-      <y>250</y>
-      <width>121</width>
-      <height>51</height>
+      <x>581</x>
+      <y>254</y>
+      <width>109</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="text">
@@ -1371,6 +1371,35 @@
     </property>
     <property name="checkable">
      <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="raw_rates">
+    <property name="geometry">
+     <rect>
+      <x>575</x>
+      <y>296</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>raw</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="clustered_rates">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>296</y>
+      <width>80</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>clustered</string>
     </property>
     <property name="checked">
      <bool>true</bool>
