@@ -36,7 +36,6 @@ class MainWindow(QMainWindow):
         self.Clusters_16_layers = pd.DataFrame()
         #self.Events_20_layers = pd.DataFrame()
         self.Events_16_layers = pd.DataFrame()
-        #self.cluster_progress.close()
         self.VMM.setEnabled
         self.show()
         self.refresh_window()
@@ -65,9 +64,6 @@ class MainWindow(QMainWindow):
             for i, file_path in enumerate(file_paths):
                 data = import_data(file_path, self)
                 self.data = data
-                print("DATA")
-                print(data)
-                print("length",len(data))
                 clusters, events = cluster_data(data, self, i+1, size)
                 print("EVENTS")
                 print(events)
@@ -93,10 +89,6 @@ class MainWindow(QMainWindow):
             self.update()
             self.data_sets = file_names
             self.refresh_window()
-            #print(self.Clusters_16_layers)
-            #print(self.Events_16_layers)
-            #print(self.Clusters_20_layers)
-            #print(self.Events_20_layers)
 
     def save_action(self):
         save_path = QFileDialog.getSaveFileName()[0]

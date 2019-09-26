@@ -48,6 +48,9 @@ def timestamp_plot(window):
 # =============================================================================
 
 def chip_channels_plot(window):
+    """
+    Shows events per channel per VMM chip.
+    """
     def chip_ch_plot_bus(events, sub_title):
         # Plot
         plt.title("VMM chip %s %s" %(VMM, sub_title))
@@ -71,8 +74,6 @@ def chip_channels_plot(window):
     fig.set_figheight(8)
     fig.set_figwidth(13)
     plt.suptitle('Channels per chip \n(%s, ...)' % window.data_sets.splitlines()[0])
-    #plt.title('16 layers')
-
     # Plot figure
     # for 20 layers
     for i, VMM in enumerate(VMM_order_20):
@@ -133,7 +134,7 @@ def channel_rates(window):
         events_20 = filter_events(events_20, window)
         start_time = events_16.head(1)['srs_timestamp'].values[0]
         end_time = events_16.tail(1)['srs_timestamp'].values[0]
-        tag = "raw"
+        tag = "raw data"
     else:
         events_16 = window.Clusters_16_layers
         events_16 = filter_coincident_events(events_16, window)

@@ -1379,27 +1379,27 @@
    <widget class="QCheckBox" name="raw_rates">
     <property name="geometry">
      <rect>
-      <x>575</x>
+      <x>581</x>
       <y>296</y>
-      <width>51</width>
+      <width>50</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>raw</string>
+     <string>all</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="clustered_rates">
     <property name="geometry">
      <rect>
-      <x>620</x>
+      <x>615</x>
       <y>296</y>
-      <width>80</width>
+      <width>76</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>clustered</string>
+     <string>neutrons</string>
     </property>
     <property name="checked">
      <bool>true</bool>
